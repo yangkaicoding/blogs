@@ -1,23 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/lib/themes/vue.css">
+  <link rel="stylesheet" href="//unpkg.com/mermaid/dist/mermaid.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/viz.js@1.8.0/viz.js"></script>
 </head>
+
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
       name: 'YangKai',
-      repo: '',
+      // nameLink: 'https://github.com/MrYangKai/blogs',
+      // repo: 'MrYangKai/blogs',
+      maxLevel: 2,
+      coverpage: 'cover.md',
       loadSidebar: true,
-      coverpage: true,
+      plugins: [
+        function (hook, vm) {
+          hook.ready(function () {
+            mermaid.initialize({ startOnLoad: false });
+          });
+          hook.doneEach(function () {
+            mermaid.init(undefined, '.mermaid');
+          });
+        }
+      ],
+      markdown: {
+        renderer: {
+          code: function (code, lang) {
+            var html = '';
+            if (code.match(/^sequenceDiagram/) || code.match(/^graph/) || code.match(/^gantt/)) {
+              html = '<div class="mermaid">' + code + '</div>';
+            }
+            var hl = Prism.highlight(code, Prism.languages[lang] || Prism.languages.markup)
+            return html + '<pre v-pre data-lang="' + lang + '"><code class="lang-' + lang + '">' + hl + '</code></pre>'
+          }
+        }
+      }
     }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.min.js"></script>
+  <script type="text/javascript" src="//unpkg.com/mermaid/dist/mermaid.min.js"></script>
 </body>
+
 </html>
