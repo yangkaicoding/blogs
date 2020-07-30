@@ -17,10 +17,7 @@
 ##### 执行顺序
 ```mermaid
 graph TD
-A[Around] -->|执行| B[Before]
-B[Before] -->|执行| C[逻辑代码]
-C[逻辑代码] -->|执行| D[After]
-D[After] -->|执行| E[AfterReturning]
+A[Around] -->|执行| B[Before] -->|执行| C[逻辑代码] -->|执行| D[After] -->|执行| E[AfterReturning]
 ```
 ##### AOP实现步骤
 ```Java
