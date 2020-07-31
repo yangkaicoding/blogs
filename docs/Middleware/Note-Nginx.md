@@ -26,6 +26,7 @@
 7：虽然启动了nginx，但是默认除了linux系统自身的浏览器可以访问之外，其他的电脑还是访问不了，因为Centos的防火墙默认阻止22以外的所有端口，可以使用CentOs系统自带的firewall命令开启80端口，即可进行访问，访问成功页面如下。
 ````
 - Nginx常用配置
+
 ```
 #user nobody;
 worker_processes  1;
