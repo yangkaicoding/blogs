@@ -32,3 +32,10 @@ yum list 列出yum服务器上面提供的所有软件名称
 
 yum search “keyword” 搜索服务器上所有和关键字相关的包
 ```
+- 安装
+
+```
+yum install "packageName" 安装
+
+yum -y install "packageName" -y 表示安装过程自动回答 yes
+```
