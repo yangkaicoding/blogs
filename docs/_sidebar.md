@@ -2,13 +2,13 @@
 
 * 常用框架
 
-  * [Spring框架](Spring/Note-Aop.md)
+  * [Spring框架](Java/Note-Aop.md)
   
 * 操作系统
 
-  * [Linux系统](Middleware/Note-Linux.md)
+  * [Linux系统](Java/Note-Linux.md)
   
 * 工具和中间件
 
-  * [Nginx配置](Middleware/Note-Nginx.md)
-  * [阿里云短信](Middleware/Note-Sms.md)
+  * [Nginx配置](Java/Note-Nginx.md)
+  * [阿里云短信](Java/Note-Sms.md)
