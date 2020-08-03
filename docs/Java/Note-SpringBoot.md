@@ -29,7 +29,6 @@
 ```
 <!--添加打包成war的声明-->
 <packaging>war</packaging>
-
 <!--将spring-boot-starter-tomcat修改为 provided方式-->
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -52,7 +51,6 @@
     <groupId>org.apache.tomcat.embed</groupId>
     <artifactId>tomcat-embed-jasper</artifactId>
 </dependency>
-
 <!-- servlet依赖-->
 <dependency>
     <groupId>javax.servlet</groupId>
@@ -63,3 +61,4 @@
     <artifactId>jstl</artifactId>
 </dependency>
 ```
+2. 配置支持JSP的配置文件application.properties，用于视图重定向jsp文件的位置。
