@@ -39,3 +39,36 @@ yum install "packageName" 安装
 
 yum -y install "packageName" -y 表示安装过程自动回答 yes
 ```
+- 升级和卸载
+
+```
+yum -y update "packageName" 升级
+
+yum -y remove "packageName" 卸载
+```
+- 其他命令
+
+```
+yum info "packageName" 查看该软件的功能
+
+yum install updates 列出目前服务器上可供本机进行升级的软件
+
+yum repolist all 列出目前yum server所使用的软件库
+
+yum clean all 删除已下载过的所有软件库的相关数据
+```
+- 二进制格式安装
+
+&emsp;&emsp;类似于Windows下的exe文件，后缀一般为bin，二进制格式文件就是编译好的文件，安装就是先给它可执行权限，然后执行即可完成安装。一般而言，通过二进制格式进行软件安装的步骤如下：
+```
+1：chomd +x soft.bin
+2:./soft.bin
+```
+- 软件安装路径
+
+&emsp;&emsp;在Windows下安装软件时，通常软件都默认安装在C盘目录下，但这样即管理不方便，也会影响系统的性能，因此通常不建议将软件安装到C盘目录中。
+
+- 总结
+
+&emsp;&emsp;源码包安装的服务是不能使用【service】命令来启动服务，因为源码包的安装位置可以由用户指定，放在哪儿并不统一，但rpm包安装后，通常是放在【/etc/rc.d/init.d】 目录中的，而【service】命令执行时，会自动搜索该目录，所以rpm包安装的服务可以使用【service】命令来启动服务，综上所述，安装的位置不同，启动的方法是有区别的。采用绝对路径启动程序的方法是通用的，通常软件包中会写上启动程序的方法的。
+
