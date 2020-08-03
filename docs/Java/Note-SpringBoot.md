@@ -30,6 +30,7 @@
 <!--添加打包成war的声明-->
 <packaging>war</packaging>
 <!--将spring-boot-starter-tomcat修改为 provided方式-->
+
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -51,6 +52,7 @@
     <groupId>org.apache.tomcat.embed</groupId>
     <artifactId>tomcat-embed-jasper</artifactId>
 </dependency>
+
 <!-- servlet依赖-->
 <dependency>
     <groupId>javax.servlet</groupId>
