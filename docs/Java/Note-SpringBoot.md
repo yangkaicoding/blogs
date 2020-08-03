@@ -40,3 +40,26 @@
 3. 命令行切换到项目所在目录，执行mvn clean package命令即可。
 4. 重命名war包，然后部署，如果用Springboot-0.0.1-SNAPSHOT.war这个文件名进行部署，那么访问的时候就要在路径上加上 Springboot-0.0.1-SNAPSHOT，较为麻烦。将其重命名为root.war，然后放进tomcat中的webapps目录即可。root.war 并不是指访问的时候要使用/root/hello，而是直接使用/hello即可进行访问，因为root表示为根路径。
 
+- SpringBoot支持JSP
+1. 构建项目，添加SpringBoot对JSP支持的依赖。
+```java
+<!-- tomcat的支持-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-tomcat</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.apache.tomcat.embed</groupId>
+    <artifactId>tomcat-embed-jasper</artifactId>
+</dependency>
+
+<!-- servlet依赖-->
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>javax.servlet-api</artifactId>
+</dependency>
+<dependency>
+    <groupId>javax.servlet</groupId>
+    <artifactId>jstl</artifactId>
+</dependency>
+```
