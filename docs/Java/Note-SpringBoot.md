@@ -26,7 +26,7 @@
 添加@ServletComponentScan注解，并且继承 SpringBootServletInitializer
 ```
 2. 修改pom.xml文件，添加打包成war的声明，并将spring-boot-starter-tomcat修改为 provided方式，以避免和独立 tomcat 容器的冲突。
-```java 
+```
 <!--添加打包成war的声明-->
 <packaging>war</packaging>
 
@@ -42,7 +42,7 @@
 
 - SpringBoot支持JSP
 1. 构建项目，添加SpringBoot对JSP支持的依赖。
-```java
+```
 <!-- tomcat的支持-->
 <dependency>
     <groupId>org.springframework.boot</groupId>
