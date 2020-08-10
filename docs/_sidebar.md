@@ -8,9 +8,13 @@
 * 操作系统
 
   * [Linux系统](Java/Note-Linux.md)
-  * [Linux系统](Java/Note-test.md)
+
   
 * 工具和中间件
 
   * [Nginx配置](Java/Note-Nginx.md)
   * [阿里云短信](Java/Note-Sms.md)
+
+* 面试突击准备
+
+  * [Nginx配置](Java/Note-Interview.md)
