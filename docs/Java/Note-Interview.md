@@ -31,14 +31,13 @@ Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便
 2：组件丰富，功能齐全。Spring Cloud 为微服务架构提供了非常完整的支持。例如、配置管理、服务发现、断路器、微服务网关等。
 3：服务拆分粒度更细，耦合度比较低，有利于资源重复利用，有利于提高开发效率可以更精准的制定优化服务方案，提高系统的可维护性。
 4：减轻团队的成本，可以并行开发，不用关注其他人怎么开发，先关注自己的开发。
-
 劣势：
 1：微服务过多，治理成本高，不利于维护系统。
 2：分布式系统开发的成本高（容错，分布式事务等）对团队挑战大。
 ```
 4. SpringCloud和dubbo区别?
 ```
-1：调用方式：dubbo是RPC，SpringCloud是Rest Api
+1：调用方式：dubbo是RPC，SpringCloud是Rest Api。
 2: 注册中心：dubbo 是zookeeper，Spring Cloud可以是zookeeper或其他。
 3：服务网关：dubbo本身没有实现，只能通过其他第三方技术整合，springcloud有Zuul路由网关，作为路由服务器。
 ```
@@ -51,16 +50,12 @@ Spring Cloud Gateway是Spring Cloud官方推出的第二代网关框架，取代
 1：服务发现--Netflix Eureka
 组件组成：Eureka服务端和Eureka客户端，Eureka服务端用作服务注册中心，支持集群部署，Eureka客户端是一个java客户端，用来处理服务注册与发现。
 工作原理：在应用启动时，Eureka客户端向服务端注册自己的服务信息，同时将服务端的服务信息缓存到本地。客户端会和服务端进行周期性的进行心跳交互进行更新服务信息。
-
 2：客户端负载均衡--Netflix Ribbon
 工作原理：提供客户端的软件负载均衡算法，它基于Http和Tcp的客户端负载均衡，使得面向REST请求时变换为客户端的负载服务调用。
-
 3：熔断器--Netflix Hystrix
 工作原理：断路器，保护系统，控制故障范围。为了保证高可用，单个服务通常会集群部署，当网络或者其他原因导致单个服务出现问题，调用这个服务就会出现线程阻塞，此时如果大量请求进入，Servlet容器的线程资源就会消耗完毕，最终导致服务瘫痪。服务与服务之间的依赖，故障会传播，对整个微服务框架造成灾难性的严重后果，这个就是服务故障的“雪崩”效应。
-
 4：服务网关--Netflix Zuul
 工作原理：api网关，路由，负载均衡等作用，类似于Nginx可以实现反向代理，在微服务架构中，后端服务往往不直接暴露给前端，而是通过一个Api网关根据请求的Url，路由到响应的服务（MVC机制）。当添加Api网关后，在第三方调用端和服务提供方之间就创建了一面墙，这面墙直接与调用方进行通信进行权限控制后再将请求均衡分发给后台服务端。
-
 5：分布式配置--Spring Cloud Config
 工作原理：提供服务端和客户端，服务器存储后端的默认实现使用git，因此它轻松支持标签版本的配置环境。Config是静态配置的如果需要动态配置，可以使用spring cloud bus进行动态配置更新。
 ```
@@ -75,7 +70,8 @@ Spring Boot是Spring开源组织下的子项目，是Spring组件一站式解决
 @SpringBootConfiguration：组合了 @Configuration 注解，实现配置文件的功能。
 @EnableAutoConfiguration：打开自动配置的功能，也可以关闭某个自动配置的选项，如关闭数据源自动配置功能：@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })。
 @ComponentScan：Spring组件扫描。
-
+```
+```
 前端控制器注解：
 @Controller：控制器，处理http请求。
 @RestController：复合注解，相当于@ResponseBody+@Controller合在一起的作用,RestController使用的效果是将方法返回的对象直接在浏览器上展示成json格式。
@@ -83,30 +79,36 @@ Spring Boot是Spring开源组织下的子项目，是Spring组件一站式解决
 @RequestMapping：将 HTTP请求映射到MVC和REST控制器的处理方法上。
 @GetMapping：将get请求映射到特定处理程序的方法上。
 @PostMapping：将post请求映射到特定处理程序的方法上。
-
+```
+```
 请求参数注解：
 @PathVariable：获取url中的数据
 @RequestParam：获取请求参数的值
-
+````
+```
 @服务类注解：
 @Service：用于标注服务层组件,表示定义一个bean。
 @Service：使用时没有传参数，Bean名称默认为当前类的类名，首字母小写。
 @Service：(“serviceBeanId”)或@Service(value=”serviceBeanId”)使用时传参数，使用value作为Bean名字。
-
+```
+```
 实体类注解：
 @Table(name = "dataBaseName")：注释在实体类上，映射数据库中相应的表。
 @Id、@Column：注释在实体类中的字段上
-
+```
+```
 自动导入注解：
 @Autowired：注解作用在构造函数、方法、方法参数、类字段以及注解上
 @Autowired注解可以实现Bean的自动注入
-
+```
+```
 事务注解：
 @Transactional
 在Spring中，事务有两种实现方式，分别是编程式事务管理和声明式事务管理两种方式：
 编程式事务管理：编程式事务管理使用TransactionTemplate或者直接使用底层的PlatformTransactionManager。对于编程式事务管理，spring推荐使用TransactionTemplate。
 声明式事务管理：建立在AOP之上的。其本质是对方法前后进行拦截，然后在目标方法开始之前创建或者加入一个事务，在执行完目标方法之后根据执行情况提交或者回滚事务，通过@Transactional就可以进行事务操作，更快捷而且简单，推荐使用。
-
+```
+```
 全局异常处理注解：
 @ControllerAdvice：定义全局异常处理类
 @ExceptionHandler：声明异常处理方法
@@ -120,7 +122,6 @@ Spring Boot是Spring开源组织下的子项目，是Spring组件一站式解决
 4：没有代码生成，也不需要XML配置。
 5：避免大量的Maven导入和各种版本冲突。
 6：让编码变得简单，让配置变得简单，是部署变得简单，是监控变得简单。
-
 劣势：
 1：依赖太多，一个spring boot项目就有很多M
 2：缺少服务的注册和发现等解决方案
@@ -136,7 +137,7 @@ Spring Boot是Spring开源组织下的子项目，是Spring组件一站式解决
 1：properties文件
 2：YAML文件
 3：系统环境变量
-4：命令行参数
+4：命令行的参数
 ```
 11. 什么是YAML文件？YAML文件配置的优势在哪里？
 ```
@@ -222,13 +223,13 @@ Spring是一个开源应用框架，旨在降低应用程序开发的复杂度�
 20.  Spring的AOP及IOC原理？
 ```
 IOC：控制反转，是一种设计思想，就是将原本在程序中手动创建对象的控制权，交由Spring框架来管理。IOC容器是Spring用来实现IOC的载体，Ioc容器实际就是个Map集合，Map中存放的是各个对象。将对象之间的相互依赖关系交给IOC容器去管理，并由IOC容器完成对象的注入，这样可以很大程度的简化应用的开发，把应用从复杂的依赖关系中解放出来，IOC容器就像是一个工厂一样，当我们需要创建一个对象的时候，只需要配置好配置文件/注解即可。
-
 AOP：面向切面编程，能够将那些与业务无关，却为业务模块所共同调用的逻辑或责任(例如：事务处理、日志管理、权限控制等)封装起来，便于减少系统的重复代码，降低模块间的耦合度，并有利于未来的可拓展性和可维护性，Spring AOP就是基于动态代理的，如果要代理的对象实现了某个接口，那么Spring AOP会使用JDK Proxy去创建对象，而对于没有实现接口的对象，就无法使用JDK Proxy去进行代理了，这时候Spring AOP会使用Cglib生成一个被代理对象的子类来作为代理。
 ```
 21.  SpringMvc框架的概述及实现原理？
+
+&emsp;&emsp; MVC是一种设计模式，SpringMVC可以帮助我我们进行更为简洁的wen层开发，并且它天生与Spring框架集成，Spring mvc下我们一般把后端分为service层（处理业务）、Dao层(数据库操作)、Entity层（实体类）、Controller层（控制层，返回数据给前台页面）。
 ```
 MVC是一种设计模式，SpringMVC可以帮助我我们进行更为简洁的wen层开发，并且它天生与Spring框架集成，Spring mvc下我们一般把后端分为service层（处理业务）、Dao层(数据库操作)、Entity层（实体类）、Controller层（控制层，返回数据给前台页面）。
-
 SpringMvc 实现原理：
 1：客户端（浏览器）发送请求，直接请求到DispatcherServlet
 2：Dispatcher根据请求的信息调用HandlerMapper，解析请求对应的Handler
@@ -239,7 +240,7 @@ SpringMvc 实现原理：
 7：DispatcherServlet把返回的Model传给View进行视图渲染
 8：把View返回给客户端（浏览器）
 ```
-22. 什么是redis?
+1.  什么是redis?
 ```
 Redis是完全开源免费的，遵循BSD协议，是一个高性能的key-value的数据库。
 ```
@@ -263,5 +264,4 @@ redis支持五种数据类型：
 5：zset(有序集合)
 场景：zset的数据类型，多了一个权重参数score，集合中的元素能够按照score进行排列，可以做排行榜应用。
 ```
-25. 
 
