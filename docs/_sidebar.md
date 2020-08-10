@@ -17,4 +17,4 @@
 
 * 面试突击准备
 
-  * [Nginx配置](Java/Note-Interview.md)
+  * [面试问题](Java/Note-Interview.md)
