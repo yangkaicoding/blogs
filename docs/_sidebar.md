@@ -7,7 +7,7 @@
 
 * 版本控制
 
-  * [Git](Java/Note-Git.md)
+  * [Git](Java/Note-git.md)
 
   
 * 操作系统
