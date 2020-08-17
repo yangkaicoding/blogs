@@ -148,7 +148,336 @@ server:
 1：在yml文件里面所有的配置，相同的级别只能出现一次。
 2：在yml文件里面如果需要进行赋值那么必须是要在“：”后面进行一个spacebar键的缩进。
 3：properties文件和yml文件之间存在排斥性，最好不要同时使用。
-4：在properties文件中的“.”在yml文件里面要全部换成“：”进行连接，并且每一级之间必须换行，在第二级开始前应该进行一个Tab键的缩进，但若为同级则就不需要进行进。
+4：在properties文件中的“.”在yml文件里面要全部换成“：”进行连接，并且每一级之间必须换行，在第二级开始前应该进行一个Tab键的缩进，但若为同级则就不需要进行缩进。
 ```
+- SpringBoot持久层支持
+- JPA
+
+&emsp;&emsp;JPA(Java Persistence API)是SUN公司官方提供的Java持久化规范。它为Java开发人员提供了一种对象/关系映射工具来管理Java应用中的关系数据。它的出现主要是为了简化现有的持久化开发工作和整合ORM技术，尤其是在充分吸收了现有的Hibernate，TopLink，JDO等ORM框架的基础上发展而来的，具有易于使用，伸缩性强等优点。
+
+&emsp;&emsp;JPA是一套规范，而不是一套产品，而像Hibernate，TopLink，JDO等ORM框架则是一套产品，如果说这些产品实现了JPA的规范，那么我们就可以称他们为JPA的实现产品。
+
+&emsp;&emsp;Spring Data JPA 是Spring基于ORM框架，JPA规范的基础上封装的一套JPA应用框架，可使开发者使用极简的代码即可实现对数据库的访问和操作，同时它提供了包括增删改查等在内的常用功能，且易于扩展，可以极大的提高开发效率。
+
+1. 构建项目，添加SpringBoot对JPA支持的依赖。
+```java
+<!-- mysql的依赖-->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.21</version>
+</dependency>
+<!-- jpa的依赖-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+```
+2. 配置支持JPA的配置文件application.properties。
+```java
+#数据源设置
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+#JPA相关配置
+spring.jpa.properties.hibernate.hbm2ddl.auto=update
+spring.jpa.show-sql=true
+```
+3. 构建实体类及对应的DAO层，详情见示例项目project_springboot_jpa详情。
+
+- MyBatis注解方式
+1. 构建项目，添加SpringBoot对MyBatis支持的依赖。
+```java
+<!-- mysql的依赖-->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.21</version>
+</dependency>
+<!-- mybatis的依赖-->
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>1.1.1</version>
+</dependency>
+```
+2. 配置支持MyBatis的配置文件application.properties。
+```java
+#数据源设置
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+```
+3. 构建实体类及对应的Mapper层，详情见示例项目project_springboot_mybatis_annotation详情
+
+- MyBatis xml文件配置方式
+1. 构建项目，添加SpringBoot对MyBatis支持的依赖。
+```java
+<!-- mysql的依赖-->
+<dependency>
+    <groupId>mysql</groupId>
+    <artifactId>mysql-connector-java</artifactId>
+    <version>5.1.21</version>
+</dependency>
+<!-- mybatis的依赖-->
+<dependency>
+    <groupId>org.mybatis.spring.boot</groupId>
+    <artifactId>mybatis-spring-boot-starter</artifactId>
+    <version>1.1.1</version>
+</dependency>
+```
+2. 配置支持MyBatis的配置文件application.properties。
+```java
+#数据源设置
+spring.datasource.url=jdbc:mysql://127.0.0.1:3306/how2java?characterEncoding=UTF-8
+spring.datasource.username=root
+spring.datasource.password=
+spring.datasource.driver-class-name=com.mysql.jdbc.Driver
+#mybatis
+mybatis.mapper-locations=classpath:mapper/**/*.xml
+#实体扫描，多个package用逗号或分号分隔
+mybatis.type-aliases-package=com.how2java.springboot.entity
+```
+3. 添加MyBatis.xml配置文件。
+```java
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.vpclub.how2j.springboot.mybatis.xml.mapper.CategoryMapper">
+</mapper>
+```
+4. 构建实体类及对应的Mapper层，详情见示例项目project_springboot_mybatis_xml详情。
+
+- SpringBoot 增删改查+分页查询
+&emsp;&emsp;JPA新增和修改所采用的都是save方法，它根据实体类的id是否为0来判断是进行增加还是修改。
+
+&emsp;&emsp;MyBatis采用sql语句来实现增删改查，其就是调用不同的sql语句，分页查询需要增加pageHelper的插件支持，并添加pageHelperConfig配置类。
+
+```java
+<!-- pageHelper的依赖-->
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper</artifactId>
+    <version>4.1.6</version>
+</dependency>
+```
+```java
+/**
+* PageHelper 配置类
+*
+* @author: 杨凯
+* @since: 2019/10/11 10:23
+*/
+@Configuration
+public class PageHelperConfig {
+    /**
+     * @Bean 表示启动PageHelper这个拦截器
+     * @configuration 表示PageHelperConfig这个类是用来做配置的
+     */
+    @Bean
+    public PageHelper pageHelper() {
+        PageHelper pageHelper = new PageHelper();
+        Properties properties = new Properties();
+        //offsetAsPageNum，设置为true时，会将RowBounds第一个参数offset当成pageNum页码使用
+        properties.setProperty("offsetAsPageNum", "true");
+        //rowBoundsWithCount,设置为true时，使用RowBounds分页会进行count查询
+        properties.setProperty("rowBoundsWithCount", "true");
+        //reasonable：启用合理化时，如果pageNum<1会查询第一页，如果pageNum>pages会查询最后一页
+        properties.setProperty("reasonable", "true");
+        pageHelper.setProperties(properties);
+        return pageHelper;
+    }
+}
+```
+- SpringBoot单元测试
+1. 构建项目，添加junit单元测试和sping-boot-starter-test的依赖。
+```java
+<!--单元测试的依赖-->
+<dependency>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+    <version>4.12</version>
+    <scope>test</scope>
+</dependency>
+<!--spring-boot-starter-test的依赖-->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+</dependency>  
+```
+2. 添加测试类，以用于测试接口是否正确。
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = SpringbootApplication.class)
+public class TestJPA {
+    @Autowired
+    private CategoryDAO categoryDAO;
+    @Test
+    public void test() {
+        List<Category> categories = categoryDAO.findAll();
+        for (Category category : categories) {
+            System.out.println("category.getName：" + category.getName());
+        }
+    }
+}
+```
+- SpringBoot文件上传下载
+1. 构建项目，添加文件上传相关配置。
+```java
+#文件上传配置
+# 最大支持文件大小
+spring.http.multipart.max-file-size=100Mb
+# 最大支持请求大小
+spring.http.multipart.max-request-size=100Mb
+```
+2. 添加文件上传下载方法
+```java
+@Slf4j
+@RestController
+@RequestMapping("/file")
+public class FileLoadController {
+
+	@Value("${system.constant.filePath}")
+	private String uploadPath;
+
+	/**
+	 * 文件上传 -通用
+	 *
+	 * @param file
+	 * @param request
+	 * @return
+	 */
+	@ApiOperation("上传")
+	@RequestMapping(value = "/upload")
+	public Result uploadImg(MultipartFile file, HttpServletRequest request) {
+
+		log.info("文件名称，{}", file.getOriginalFilename());
+
+		//上传文件存储路径
+		String filePath = uploadPath;
+		//设置上传文件时间
+		String uploadDate = DateUtils.format(new Date(), Constant.YEARMONTHDAY);
+
+		Map<String, Object> fileMap = new ConcurrentHashMap<>();
+
+		//判断文件是否为图片
+		String fileType = null;
+		if (!isImage(file)) {
+			fileType = "file";
+		} else {
+			fileType = "image";
+		}
+		filePath = filePath + "/" + fileType + "/" + uploadDate;
+		String fileName = file.getOriginalFilename();
+
+		String oldFileName = fileName;
+		//文件后缀
+		String suffixName = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+		//生成新的文件名称
+		fileName = getUUID() + suffixName;
+		fileMap.put("fileName", oldFileName);
+
+		File localFile = new File(filePath);
+		if (!localFile.exists()) {
+			boolean isCreated = localFile.mkdirs();
+			if (!isCreated) {
+				//目标上传目录创建失败,可做其他处理,例如抛出自定义异常等,一般应该不会出现这种情况。
+				return new Result().error("文件目录创建失败");
+			}
+		}
+		localFile = new File(filePath + "/" + fileName);
+		try {
+			file.transferTo(localFile);
+			fileMap.put("filePath", fileType + "/" + uploadDate + "/" + fileName);
+			return new Result().ok(JSONUtil.toJsonStr(fileMap));
+		} catch (Exception e) {
+			log.error("文件上传异常" + e);
+			return new Result().error("该文件上传异常：" + oldFileName);
+		}
+	}
+
+	/**
+	 * 文件下载 - 通用
+	 *
+	 * @param filePath
+	 * @param fileName
+	 * @param response
+	 */
+	@ApiOperation("下载")
+	@RequestMapping(value = "/download")
+	public void download(String filePath, String fileName, HttpServletResponse response) {
+		String realPath = filePath;
+		log.info("realPath:{}", realPath);
+		try {
+			FileUtil.downLoad(uploadPath + "/" + filePath, new String(fileName.getBytes(), "ISO8859-1"), response);
+		} catch (UnsupportedEncodingException e) {
+			log.error("文件下载错误,{}", e);
+		}
+	}
+
+	/**
+	 * 生成UUID
+	 *
+	 * @return
+	 */
+	public static String getUUID() {
+		UUID uuid = UUID.randomUUID();
+		String str = uuid.toString();
+		String uuidStr = str.replace("-", "");
+		return uuidStr;
+	}
+
+	/**
+	 * 判断文件是否为图片
+	 *
+	 * @param file
+	 * @return
+	 */
+	private boolean isImage(MultipartFile file) {
+		boolean flag = false;
+		try {
+			InputStream is = file.getInputStream();
+			BufferedImage bi = ImageIO.read(is);
+			if (null == bi) {
+				return flag;
+			}
+			is.close();
+			flag = true;
+		} catch (Exception e) {
+			log.error("判断文件是否为图片错误：{}", e);
+		}
+		return flag;
+	}
+
+	/**
+	 * 判断是否为允许的上传文件类型,true表示允许
+	 */
+	private boolean checkFile(String fileName) {
+		//设置允许上传文件类型
+		String suffixList = "txt,doc,docx,xls,xlsx,pdf,ppt,pptx,zip,rar";
+		//获取上传的文件后缀名
+		String suffix = fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length());
+		if (suffixList.contains(suffix.trim().toLowerCase())) {
+			return true;
+		}
+		return false;
+	}
+}
+```
+- SpringBoot Restful风格
+
+&emsp;&emsp;Rest即Representational State Transfer的缩写，可译为“表现层状态转化”。Rest最大的几个特点为：资源、同一接口、URL和无状态。
+
+&emsp;&emsp;Restful是一种网络应用程序的设计风格和开发模式，基于Http，可以使用XML格式定义或JSON格式定义。Restful适用于移动互联网厂商作为业务使用接口的场景，实现第三方OTT调用移动网络资源的功能，动作类型为新增、变更、删除所调用的资源。
+
+- Restful的特点：
+1. 每一个URL代表一种资源。
+2. 资源的表现形式是XML获得HTML。
+3. 通过操作资源的表现形式来操作资源。
+4. 客户端与服务端之间的交互在请求之间是无状态的，从客户端到服务端的每个请求都必须包含理解请求所必须的信息。
+5. 客户端使用GET、POST、PUT、DELETE等4个表示操作方式的动词来对服务端进行操作，GET用来获取资源，POST用来新建资源(也可用于资源更新)，PUT用来更新资源，DELETE用来删除资源。
+
 
 
