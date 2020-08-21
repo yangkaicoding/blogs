@@ -21,7 +21,7 @@ cd ../path #切换到上层目录中的path目录中，”..“表示上一层�
 * -h：将文件容量以较易读的方式（GB,KB等）列出来
 * -R: 连同子目录的内容一起递归列出，等于该目录下的所有文件都会显示出来
 
-&emsp;&emsp;备注：这些参数也可以组合使用，下面举两个例子：
+备注：这些参数也可以组合使用，下面举两个例子：
 ```
 ls -l  #以长数据串的形式列出当前目录下的数据文件和目录
 ls -lr #以长数据串的形式列出当前目录下的所有文件
@@ -32,8 +32,7 @@ ls -lr #以长数据串的形式列出当前目录下的所有文件
 ```
 基本语法：grep[-acinv][-color=auto]'查找字符串'filename
 ```
-&emsp;&emsp;常用参数如下：
-
+常用参数如下：
 * -a：将binary文件以text文件的方式查找数据
 * -c：计算找到‘查找字符串’的次数
 * -i：忽略大小写的区别，即把大小写视为相同
@@ -42,11 +41,12 @@ ls -lr #以长数据串的形式列出当前目录下的所有文件
 示例：grep -color=auto 'MANPATH'/etc/man.config #取出文件/etc/man.config中包含MANPATH的行，并把找到的关键字加上颜色
 ```
 - find命令
+
 &emsp;&emsp;find命令是一个基于查找功能非空强大的命令，相对而言，它的使用也相对较为复杂，参数也比较多，所以在这里将它们分类列出，它的基本语法如下：
 ```
 基本语法：find [path][option][action]
 ```
-&emsp;&emsp;与时间有关的参数：
+与时间有关的参数：
 * -mtime n：n为数字，意思为在n天之前的一天内被更改过的文件
 * -mtime +n：列出在n天之前（不含n天本身）被更改过的文件名
 * -mtime -n：列出在n天之内（含n天本身）被更改过的文件名
@@ -54,7 +54,7 @@ ls -lr #以长数据串的形式列出当前目录下的所有文件
 ```
 示例：find /root -mtime 0 #在当前目录下查找今天之内有改动的文件
 ```
-&emsp;&emsp;与用户或用户组名有关的参数：
+与用户或用户组名有关的参数：
 * -user name：列出文件所有者为name的文件
 * -group name：列出文件所属用户组为name的文件
 * -uid n：列出文件所有者的用户id为n的文件
@@ -62,7 +62,7 @@ ls -lr #以长数据串的形式列出当前目录下的所有文件
 ```
 find /home/ -user root #在目录/home中找出所有者为root的文件
 ```
-&emsp;&emsp;与文件有关的参数：
+与文件有关的参数：
 * -name filename：查找出文件名为filename的文件
 * -size [+-]size：查找出比size还要大（+）或小（-）的文件
 * -type：查找出文件类型为type的文件，type的值主要有：一般文件（f）、设备文件（b、c）、目录（d）、链接文件（l）、套接字（s）、FIFO管道文件（p）
@@ -83,6 +83,7 @@ find /home/ -user root #在目录/home中找出所有者为root的文件
 示例1：cp -a file1 file2 #连同文件的所有特性把文件file1复制成文件file2
 ```
 - mv命令
+
 &emsp;&emsp;mv命令常用于移动文件、目录或更名，它的常用参数如下：
 * -f：若目标文件已经存在，不会进行询问而是直接覆盖
 * -i：若目标文件已经存在，就会询问是否覆盖
@@ -93,6 +94,7 @@ find /home/ -user root #在目录/home中找出所有者为root的文件
 示例2：mv file1 file2 file3 dir #把文件file1、file2、file3移动到目录dir中
 ```
 - rm命令
+
 &emsp;&emsp;rm命令常用于删除文件或目录，它的常用参数如下:
 * -f：忽略不存在的文件，不会出现警告消息
 * -i：互动模式，在删除前会询问用户是否操作
@@ -102,6 +104,7 @@ find /home/ -user root #在目录/home中找出所有者为root的文件
 示例2：rm -fr #强制删除目录dir中的所有文件
 ```
 - ps命令
+
 &emsp;&emsp;ps命令常用于将某个时间点的进程运行情况选取下来并输出，它的常用参数如下：
 * -A：所有的进程均显示出来
 * -a：不与terminal有关的所有进程
@@ -114,6 +117,7 @@ find /home/ -user root #在目录/home中找出所有者为root的文件
 示例3：ps -la #查看系统所有的进程数据
 ```
 - kill命令
+
 &emsp;&emsp;kill命令常用于向某个工作（%jobnumber）或者是某个PID（数字）传送一个终止信号，它通常与ps和jobs命令一起使用，它的基本语法如下：
 ```
 kill -signal PID
@@ -131,6 +135,7 @@ kill -signal PID
 示例2：kill -SIGHUP PID #重新启动进程ID为PID的进程，PID可用ps命令通过管道命令加上grep命令进行筛选获得
 ```
 - tar命令
+
 &emsp;&emsp;tar命令常用于对文件进行打包，默认情况下并不会进行压缩，但如果指定了相应的参数，它会调用相应的压缩程序（如gzip和bzip等）进行压缩和解压，它的常用参数如下：
 * -c：新建打包文件
 * -t：查看打包文件的内容含有哪些文件
@@ -146,11 +151,13 @@ kill -signal PID
 示例3：tar -jxv -f filename.tar.bz2 -C dir(欲解压的目录) #解压
 ```
 - cat命令
+
 &emsp;&emsp;该命令常用于查看文本文件的内容，后接要查看的文件名，通常可用管道与more和less一起使用，从而可以一页页地查看数据。
 ```
 示例1：cat text | less #查看text文件中的内容
 ```
 - chomd命令
+
 &emsp;&emsp;chomd命令常用于改变文件的权限
 * chmod [-R] 文件或目录
 * -R：进行递归的持续更改，即连同子目录下的所有文件都会更改
