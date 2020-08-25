@@ -21,6 +21,13 @@
   * [Nginx配置](Java/Note-Nginx.md)
   * [阿里云短信](Java/Note-Sms.md)
 
+
+* 开发环境配置
+
+  * [MacbookPro](Java/Note-mac.md)
+
+
 * 面试突击准备
 
+  * [基础知识](Java/Note-JavaBasis.md)
   * [面试问题](Java/Note-Interview.md)
