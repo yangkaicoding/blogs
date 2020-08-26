@@ -6,7 +6,7 @@
 Shift+F6 重命名文件
 Command+Option+V 提取变量
 Command+Option+F 提取字段
-ommand+Option+M 将选中的代码提取为方法
+Command+Option+M 将选中的代码提取为方法
 ```
 2. Search/Replace (查询/替换)
 ```
@@ -16,6 +16,8 @@ Command+Shift+R	全局替换(根据路径)
 3. Editing (编辑)
 ```
 Command+N 声明代码
+```
+```
 Shift+Enter 开始新的一行
 ```
 ```
@@ -30,7 +32,7 @@ Control+I 实现方法(实现接口中的方法)
 Option+向上箭头 连续选中代码块
 Option+向下箭头 减少当前选中的代码块
 ```
-4. Navigation (导航)
+1. Navigation (导航)
 ```
 Control+H 显示当前类的层次结构
 Command+F12 显示当前的文件结构层
