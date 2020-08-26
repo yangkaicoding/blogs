@@ -1,5 +1,6 @@
 #### 前言
 
+##### Java概述
 - 何为编程？
 
 &emsp;&emsp;编程就是让计算机为解决某个问题而使用某种程序设计语言编写程序代码，并最终得到结果的过程。
@@ -63,6 +64,7 @@ Java Development Kit是提供给Java开发人员使用的，其中包含了Java�
 3. Java的类是单继承，C++z支持多重继承；虽然Java的类不可以多继承，但是接口可以多继承。
 4. Java有自动内存管理机制，不需要程序员手动释放无用内存。
 
+##### 基础语法
 - Java的数据类型？
 
 &emsp;&emsp;Java语言是强类型语言，对于每一种数据都定义了明确的具体的数据类型，在内存中分配了不同大小的内存空间。
@@ -82,4 +84,94 @@ Java Development Kit是提供给Java开发人员使用的，其中包含了Java�
 1. 类（class）
 2. 接口（interface）
 3. 数组（[]）
+```
+- switch是否能作用在byte上？是否能作用在long上？是否能作用在String上？
+
+&emsp;在Java 5以前，switch(expr)中，expr只能是byte、short、char、int。从Java5开始，Java中引入了枚举类型，expr也可以是enum类型，从Java7开始，expr还可以是字符串(String),但是长整型（long）在目前所有的版本中都是不可以的。
+
+- 如何用最有效的方法计算2乘以8？
+
+&emsp;&emsp;2 << 3 (向左移动3位相当于乘以2的3次方，向右移动3位相当于除以2的3次方)。
+
+- Math.round(11.5)等于多少？Math.round(-11.5)等于多少？
+
+&emsp;&emsp;Math.round(11.5)的返回值是12，Math.round(-11.5)的返回值是-11，四舍五入的原理是在参数上加0.5然后进行下取整。
+
+- float f=3.4是否正确？
+
+&emsp;&emsp;不正确，3.4是双精度数，将双精度型（double）赋值给浮点型（flot）属于向下转型（down-casting，也称为窄化）会造成精度损失，因此需要强制类型转换float f = (float)3.4；或者写成flot f =3.4F。
+
+- short s1 = 1;s1 = s1 + 1;有错误吗？short s1 = 1; s1 += 1有错误吗？
+
+&emsp;&emsp;对于 short s1 = 1; s1 = s1 + 1; 由于1是int类型，因此s1+1运算结果也是int型，需要强制转换类型才能赋值给short型，所以会报错。
+
+&emsp;&emsp;对于 short s1 = 1; s1 += 1;&emsp;&emsp;可以正确编译，因为s1 += 1;相当于s1 = (short)(s1 + 1);其中有隐含的强制类型转换，所以不会报错。
+
+- 访问修饰符
+
+&emsp;&emsp;定义：Java中，可以使用访问修饰符来保护对类、变量、方法和构造方法的访问。Java支持public、private、protected、default四种不同的访问权限。
+```
+public：对所有的类可见，使用的对象为类、接口、变量、方法。
+default：在同一包内可见，不使用任何修饰符，使用的对象为类、接口、变量、方法。
+private：在同一类内可见，使用的对象为：变量、方法。注意：private不能修饰外部类。
+protected：对同一包内的类和所有的子类可见，使用的对象为变量、方法。注意：protected不能修饰外部类。
+```
+##### 运算符
+- &和&&的区别？
+
+&emsp;&emsp;&运算符有两种用法：1：按位与；2：逻辑与
+
+&emsp;&emsp;&&运算符是短路与运算。逻辑与跟短路与的差别是非常巨大的，虽然二者都要求运算符左右的两端的布尔值都是true整个表达式的值才是true。&&之所以称为短路运算，是因为如果&&左边的表达式的值是false，右边的表达式会被直接短路掉，不会进行运算。逻辑或运算符（|）和短路或运算符（||）的差别也是如此。
+
+- final有什么用？
+
+&emsp;&emsp;作用：用于修饰类、属性和方法
+```
+被final修饰的类不可以被继承。
+被fianl修饰的方法不可以被重写。
+被final修饰的变量不可以被改变，被fianl修饰不可变的是变量的引用，而不是引用指向的内容，引用指向的内容是可以改变的。
+```
+- final finally finalize区别？
+
+&emsp;&emsp;final可以修饰类、变量、方法，修饰类表示该类不能被继承、修饰方法表示该方法不能被重写、修饰变量表示该变量是一个常量不能被重写赋值。
+
+&emsp;&emsp;finally一般作用在try-catch代码块中，在处理异常的时候，通常我们将一定要执行的代码放在finally代码块中，表示不管是否出现异常，该代码块都会执行，一般用来存放一些关闭资源的代码。
+
+&emsp;&emsp;finalize是一个方法，属于Object类的一个方法，而Object类是所有类的父类，该方法一般由垃圾回收器来调用，当我们调用System.gc()方法的时候，由垃圾回收器调用finalize()，回收垃圾。
+
+- this关键字的用法
+
+&emsp;&emsp;this是自身的一个对象，代表对象本身，可以理解为指向对象本身的一个指针。
+
+&emsp;&emsp;this的用法在Java中大体可以分为3种：
+
+1. 普通的直接引用，this相当于是指向当前对象本身。
+2. 形参与成属性名称重名，用this来区分
+```java
+public person(String name，int age) {
+    this.name = name;
+    this.age = age;
+}
+```
+3. 引用本类的构造函数
+```java
+public class person{
+    private int age;
+    private String naem;
+
+    //无参构造
+    public person() {
+
+    }
+
+    //有参构造
+    public person(String name) {
+        this.name = name;
+    }
+
+    public person(String name，int age) {
+        this(name);
+        this.age = age;
+    }
+}
 ```
