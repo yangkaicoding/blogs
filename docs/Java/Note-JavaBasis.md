@@ -64,6 +64,8 @@ Java Development Kit是提供给Java开发人员使用的，其中包含了Java�
 3. Java的类是单继承，C++z支持多重继承；虽然Java的类不可以多继承，但是接口可以多继承。
 4. Java有自动内存管理机制，不需要程序员手动释放无用内存。
 
+****
+
 ##### 基础语法
 - Java的数据类型？
 
@@ -107,7 +109,9 @@ Java Development Kit是提供给Java开发人员使用的，其中包含了Java�
 
 &emsp;&emsp;对于 short s1 = 1; s1 += 1;&emsp;&emsp;可以正确编译，因为s1 += 1;相当于s1 = (short)(s1 + 1);其中有隐含的强制类型转换，所以不会报错。
 
-- 访问修饰符
+****
+
+#### 访问修饰符
 
 &emsp;&emsp;定义：Java中，可以使用访问修饰符来保护对类、变量、方法和构造方法的访问。Java支持public、private、protected、default四种不同的访问权限。
 ```
@@ -175,3 +179,87 @@ public class person{
     }
 }
 ```
+- super关键字的用法
+
+&emsp;&emsp;super可以理解为是指向自己超（父）类对象的一个指针，而这个超类指的是离自己最近的一个的父类。
+
+&emsp;&emsp;super也有三种用法：
+
+1. 普通的直接引用，与this类似，super相当于是指向当前对象的父类的引用，这样就可以用super.xxx来引用父类的成员。
+2. 子类中的成员变量或方法与父类中的成员变量或方法同名时，用super进行区分。
+```java
+public person{
+    protected String name;
+
+    public person(String name) {
+        this.name = name;
+    }
+}
+
+public class student extends person{
+    private String name;
+
+    public student(String name, String name1) {
+        super(name);
+        this.name = name1;
+    }
+
+    public void getInfo(){
+        System.out.println(this.name);//child
+        System.out.println(super.name);//fatcher
+    }
+}
+
+public calss Test {
+    public static void main(String[] args) {
+        Student s1 = new Student(”Fatcher“,"Child");
+        s1.getInfo();
+    }
+}
+```
+3. 引用父类构造函数
+
+&emsp;&emsp;super(参数)：调用父类中的某一个构造函数（应该为构造函数中的第一条语句）
+
+&emsp;&emsp;this(参数)： 调用本类中另一种形式的构造函数（应该为构造函数中的第一条语句）
+
+- this与super的区别
+1. this：它代表当前对象名（在程序中易产生二义性之处，应当使用this来指明当前对象；如果函数的形参与类中的成员数据同名，这时需用this来指明成员变量名）。
+2. super：它引用当前对象的直接父类中的成员（用来访问直接父类中被隐藏的父类中的成员数据或函数，基类与派生类中有相同成员定义时需用：super.变量名、super.成员函数名）。
+3. super()与this()关键字类似，区别是super()在子类中调用父类的构造方法，this()在本类内调用本类的其他构造方法。 
+4. super()和this()均需放在构造方法内第一行。
+5. this和super不能同时出现在一个构造函数里面，因为this必然会调用其它的构造函数，而其它的构造函数必然也会有super语句的存在，所以在同一个构造函数里面有相同的语句，就失去了语句的意义，编译器也不会通过。
+1. this()和super()都指的是对象，所以，均不可以在static环境中使用，包括static变量，static方法，static代码块。
+2. 从本质上讲，this是一个指向本对象的指针，然而super是一个Java关键字。
+
+- static存在的主要意义
+
+&emsp;&emsp;static的主要意义是在于创建独立于具体对象的域变量或方法，因此以致于即使没有创建对象，也能使用属性和调用方法。
+
+&emsp;&emsp;static关键字还有一个比较关键的作用的就是用来形成静态代码块以优化程序性能。static代码块可以置于类中的任何地方，类中可以有多个static代码块。在类初次被加载的时候，会按照static代码块的顺序来执行每个static代码块，并且只会执行一次。
+
+- static的独特之处
+
+&emsp;&emsp;1.被static修饰的变量或者方法是独立于该类的任何对象，也就是说，这些变量和方法不属于任何一个实例对象，而是被类的实例对象所共享。
+```
+如何通俗理解"被类的实例对象所共享"这句话呢？通俗来讲就是说，一个类的静态成员，它是属于大伙的（这里的大伙指的是这个类的多个对象实例，我们都知道一个类可以创建多个实例）是所有的类对象共享的，不像成员变量是各自的（各自指的是这个类的单个实例对象）。
+```
+&emsp;&emsp;2.在该类被第一次加载的时候，就会去加载被static修饰的部分，而且只会在类第一次使用的时候进行加载并进行初始化，后面根据需要可以再次进行赋值。
+
+&emsp;&emsp;3.static变量值在类加载的时候分配空间，以后创建类对象的时候不会重新分配，但是赋值的话，是可以任意赋值的。
+
+&emsp;&emsp;4.被static修饰的变量或者方法是优先与对象存在的，也就是说当一个类加载完毕之后，即便没有创建对象，也可以去访问。
+
+- static应用场景
+
+&emsp;&emsp;因为static是被类的实例对象所共享，因此如果某个成员变量是被所有对象所共享的，那么这个成员变量就应该被定义为静态变量。
+```
+1：修饰成员变量
+2：修饰成员方法
+3：静态代码块
+4：修饰类（只能修饰内部类也就是静态内部类）
+5：静态导包
+```
+- static注意事项
+1. 静态只能访问静态
+2. 非静态既可以访问非静态的，也可以访问静态的。
