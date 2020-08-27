@@ -9,7 +9,12 @@
 
   * [Git](Java/Note-git.md)
 
-  
+
+* 版本控制
+
+  * [代码片段](Java/Note-CodeSegment.md)
+
+
 * 操作系统
 
   * [Linux系统](Java/Note-Linux.md)
@@ -24,7 +29,7 @@
 
 * 开发环境配置
 
-  * [MacbookPro](Java/Note-mac.md)
+  * [MacbookPro](Java/Note-MacbookPro.md)
 
 
 * 面试突击准备
