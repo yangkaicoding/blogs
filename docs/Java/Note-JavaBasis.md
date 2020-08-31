@@ -195,7 +195,6 @@ public person{
         this.name = name;
     }
 }
-
 public class student extends person{
     private String name;
 
@@ -209,7 +208,6 @@ public class student extends person{
         System.out.println(super.name);//fatcher
     }
 }
-
 public calss Test {
     public static void main(String[] args) {
         Student s1 = new Student(”Fatcher“,"Child");
