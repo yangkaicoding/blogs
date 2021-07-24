@@ -63,13 +63,13 @@ SpringMvc 实现原理：
 
 1.  什么是SpringBoot?
 ```
-Spring Boot是Spring开源组织下的子项目，是Spring组件一站式解决方案，主要是简化了使用Spring的难度，简省了繁重的配置，提供了各种启动器，开发者能快速上手。
+SpringBoot是Spring开源组织下的子项目，是Spring组件一站式解决方案，主要是简化了使用Spring的难度，简省了繁重的配置，提供了各种启动器，开发者能快速上手。
 ```
 2.  SpringBoot常用注解?
 ```
 启动注解： 
 @SpringBootApplication，它也是SpringBoot的核心注解，主要组合包含了以下3个注解：
-@SpringBootConfiguration：组合了 @Configuration 注解，实现配置文件的功能。
+@SpringBootConfiguration：组合了@Configuration注解，实现配置文件的功能。
 @EnableAutoConfiguration：打开自动配置的功能，也可以关闭某个自动配置的选项，如关闭数据源自动配置功能：@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })。
 @ComponentScan：Spring组件扫描。
 前端控制器注解：
@@ -92,7 +92,7 @@ Spring Boot是Spring开源组织下的子项目，是Spring组件一站式解决
 @Id、@Column：注释在实体类中的字段上
 自动导入注解：
 @Autowired：注解作用在构造函数、方法、方法参数、类字段以及注解上
-@Autowired注解可以实现Bean的自动注入
+@Autowired：注解可以实现Bean的自动注入
 事务注解：
 @Transactional
 在Spring中，事务有两种实现方式，分别是编程式事务管理和声明式事务管理两种方式：
@@ -181,7 +181,7 @@ public class CorsConfig {
 10.  SpringBoot和SpringCloud的区别？
 ```
 1：SpringBoot专注于快速方便的开发单个个体微服务。
-2：SpringBoot可以离开SpringCloud独立使用开发项目， 但是SpringCloud离不开SpringBoot，属于依赖的关系。
+2：SpringBoot可以离开SpringCloud独立使用开发项目，但是SpringCloud离不开SpringBoot，属于依赖的关系。
 3：SpringBoot专注于快速、方便的开发单个微服务个体，SpringCloud关注全局的服务治理框架。
 4：SpringCloud是关注全局的微服务协调整理治理框架，它将SpringBoot开发的一个个单体微服务整合并管理起来，为各个微服务之间提供，配置管理、服务发现、断路器、路由、微代理、事件总线、全局锁、决策竞选、分布式会话等等集成服务。
 ```
@@ -195,17 +195,17 @@ public class CorsConfig {
 ```
 1: 代码结构混乱：业务复杂，导致代码量很大，管理会越来越困难。同时，这也会给业务的快速迭代带来巨大挑战；
 2: 开发效率变低：开发人员同时开发一套代码，很难避免代码冲突。开发过程会伴随着不断解决冲突的过程，这会严重的影响开发效率；
-3: 排查解决问题成本高：线上业务发现 bug，修复 bug 的过程可能很简单。但是，由于只有一套代码，需要重新编译、打包、上线，成本很高。
+3: 排查解决问题成本高：线上业务发现bug，修复bug的过程可能很简单。但是，由于只有一套代码，需要重新编译、打包、上线，成本很高。
 ```
 2.  什么是SpringCloud?
 ```
-Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、智能路由、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。
+SpringCloud是一系列框架的有序集合。它利用SpringBoot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、智能路由、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。
 ```
 3.  SpringCloud框架优劣势？
 ```
 优势：
 1：产出于Spring大家族，Spring在企业级开发框架中无人能敌，来头很大，可以保证后续的更新、完善。
-2：组件丰富，功能齐全。Spring Cloud 为微服务架构提供了非常完整的支持。例如、配置管理、服务发现、断路器、微服务网关等。
+2：组件丰富，功能齐全。SpringCloud为微服务架构提供了非常完整的支持。例如、配置管理、服务发现、断路器、微服务网关等。
 3：服务拆分粒度更细，耦合度比较低，有利于资源重复利用，有利于提高开发效率可以更精准的制定优化服务方案，提高系统的可维护性。
 4：减轻团队的成本，可以并行开发，不用关注其他人怎么开发，先关注自己的开发。
 劣势：
@@ -215,7 +215,7 @@ Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便
 4.  SpringCloud和dubbo区别?
 ```
 1：调用方式：dubbo是RPC，SpringCloud是Rest Api。
-2: 注册中心：dubbo 是zookeeper，Spring Cloud可以是zookeeper或其他。
+2：注册中心：dubbo 是zookeeper，SpringCloud可以是zookeeper或其他。
 3：服务网关：dubbo本身没有实现，只能通过其他第三方技术整合，springcloud有Zuul路由网关，作为路由服务器。
 ```
 5.  什么是SpringCloud Gateway?

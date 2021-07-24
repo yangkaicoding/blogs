@@ -10,7 +10,7 @@
   * [Git](Java/Note-git.md)
 
 
-* 版本控制
+* 代码片段
 
   * [代码片段](Java/Note-CodeSegment.md)
 
@@ -35,4 +35,4 @@
 * 面试突击准备
 
   * [基础知识](Java/Note-JavaBasis.md)
-  * [面试问题](Java/Note-Interview.md)
+  * [面试总结](Java/Note-Interview.md)
