@@ -1,8 +1,6 @@
-#### 前言
-&emsp;&emsp;Java基础
+#### 基础概念
 
-##### 基础概念与常识
-- Java语言有哪些特点？
+##### Java语言有哪些特点？
 1. 可靠性
 2. 安全性
 3. 简单易学；
@@ -50,4 +48,33 @@ HotSpot VM 采用了惰性评估(Lazy Evaluation)的做法，根据二八定律�
 ![image](https://snailclimb.gitee.io/javaguide/docs/java/basis/images/%E7%BC%96%E8%AF%91%E5%9E%8B%E8%AF%AD%E8%A8%80%E5%92%8C%E8%A7%A3%E9%87%8A%E5%9E%8B%E8%AF%AD%E8%A8%80.png)
 - 那为什么说Java语言是“编译与解释并存”？  
 这是因为 Java 语言既有编译型语言的特征，也具有解释型语言的特征。因为 Java 程序要经过先编译、后解释这两个步骤之后，才会生成字节码(.class文件)，这种字节码必须由 Java 解释器来解释执行。
+
+
+##### Oracle JDK VS OpenJDK
+- Oracle JDK 和 OpenJDK 之间是否存在重大差异？
+1. 对于 Java7而言，并没有什么关键得地方。OpenJDK 项目主要基于 Sun公司捐赠得 HotSpot 源代码。此外，OpenJDK 被选为 Java7 得参考实现，由 Oracle 工程师来进行维护。关于 JVM、JDK、JRE 和 OpenJDK 之间得区别，Oracle 博客帖子在2012年有一个更详细的答案，以下是截取的内容：
+
+OpenJDK 存储库中的源代码与用于构建 Oracle JDK 的代码之间有什么区别？  
+答：两者非常接近，我们的Oracle JDK 版本构建过程基于 OpenJDK7 构建，但只添加了几个部分，例如部署代码，其中包括 Oracle 的 Java 插件和 Java WebStart 的实现，以及一些闭源的第三方组件，如图形光栅化器，一些开源的第三方组件，如 Rhino，以及一些零碎的东西，如附加文档或第三方字体。展望未来，我们的目的是开源 Oracle JDK 的所有部分，除了我们考虑商业功能的部分。  
+
+- 区别总结：
+1. Oracle JDK 大概每6个月发一次主要版本，而 OpenJDK 版本大概每三个月发布一次，但这也不是固定的。
+2. Oracle JDK 是 OpenJDK 的一个实现，并不是完全开源的，而 OpenJDK 是一个参考模型并且是完全开源的。
+3. Oracle JDK 与 OpenJDK 相比提供了更好的性能，但 Oracle JDK 不会为即将发布的版本提供长期支持，用户每次都必须通过更新到最新的版本来获得支持。
+4. Oracle JDK 比 OpenJDK 更为稳定。OpenJDK 和 Oracle JDK 的代码几乎相同，但 Oracle JDK 有更多的类和一些错误修复。因此，如果你想开发企业/商业软件，我建议你选择 Oracle JDK，因为它经过了彻底的测试和稳定。在某些情况下，有些人提到在使用 OpenJDK 时可能会遇到许多应用程序崩溃的问题，但是只需要切换到 Oracle JDK 就可以彻底解决问题。
+
+
+
+##### Java 与 C++ 的区别？
+- 虽然，Java 和 C++ 都是面向对象的语言，且都支持封装、继承和多态，但是它们两者之间还是有很多不同的地方：
+1. Java 不提供指针来直接访问内存，程序内存更加安全；
+2. Java 有自动内存管理的垃圾回收机制(GC)，且不需要程序员手动释放无用内存；
+3. Java 的类是单继承的，但 C++ 支持多重继承；虽然在 Java 中类不可以多继承，但是接口可以多继承；
+4. C++ 同时支持方法的重载和操作符重载，但是Java 中只支持方法的重载(操作符重载增加了复杂性，这与 Java 最初的设计思想不相符合)。
+
+****
+#### 基础语法
+
+
+
 
