@@ -1,9 +1,10 @@
 全部笔记
 
-* Java指南
+* Java
   
-  * [Java基础常见知识(上)](Java/basic1/java-basic-questions-01.md)
-
+  * [Java基础知识(上)](Java/basic1/java-basic-questions-01.md)
+  * [Java基础知识(中)](Java/basic2/java-basic-questions-01.md)
+  * [Java基础知识(下)](Java/basic3/java-basic-questions-01.md)
 
 * 常用框架
 
