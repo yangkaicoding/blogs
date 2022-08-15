@@ -99,7 +99,7 @@ OpenJDK 存储库中的源代码与用于构建 Oracle JDK 的代码之间有什
 
 ### Java 语言 关键字有哪些？
 | 分类 | 关键字 |  |  |  |  |  |  |  |  |  |  |  |  |
-| :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |    
+| :------------: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: | :----: |    
 | 访问控制 | privte | protected | public |            
 | 与包相关 | import | package |
 | 保留字段 | goto | const |
@@ -108,6 +108,7 @@ OpenJDK 存储库中的源代码与用于构建 Oracle JDK 的代码之间有什
 | 基本类型 | byte | short | char | double | float | int | long | boolean |
 | 程序控制 | break | continue | return | do | while | if | else | for | instanceof | switch | case | default | assert |
 | 类、方法和变量的修饰符 | abstract | class | extend | final | implements | interface | navite | new | static | strictfp | synchronized | transient | volatile | enum |
+
 ```
 TIPS：所有的关键字都是小写的，在 IDEA 中会以特殊颜色来进行显示。
 default 这个关键字很特殊，即属于程序控制，也属于类、方法和变量修饰符，同时还属于访问控制关键字。
