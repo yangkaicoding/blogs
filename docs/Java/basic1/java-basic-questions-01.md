@@ -107,7 +107,7 @@ OpenJDK 存储库中的源代码与用于构建 Oracle JDK 的代码之间有什
 | 错误处理 | try | catch | throw | throws | finally |
 | 基本类型 | byte | short | char | double | float | int | long | boolean |
 | 程序控制 | break | continue | return | do | while | if | else | for | instanceof | switch | case | default | assert |
-| 类、方法和变量的修饰符 | abstract | class | extend | final | implements | interface | navite | new | static | strictfp | synchronized | transient | volatile | enum |
+| 类名方法变量 | abstract | class | extend | final | implements | interface | navite | new | static | strictfp | synchronized | transient | volatile | enum |
 
 ```
 TIPS：所有的关键字都是小写的，在 IDEA 中会以特殊颜色来进行显示。
