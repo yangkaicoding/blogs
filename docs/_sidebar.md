@@ -3,8 +3,8 @@
 * Java
   
   * [Java基础知识(上)](Java/basic1/java-basic-questions-01.md)
-  * [Java基础知识(中)](Java/basic2/java-basic-questions-01.md)
-  * [Java基础知识(下)](Java/basic3/java-basic-questions-01.md)
+  * [Java基础知识(中)](Java/basic2/java-basic-questions-02.md)
+  * [Java基础知识(下)](Java/basic3/java-basic-questions-03.md)
 
 * 常用框架
 
