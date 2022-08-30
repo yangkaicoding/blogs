@@ -106,7 +106,7 @@ OpenJDK 存储库中的源代码与用于构建 Oracle JDK 的代码之间有什
 | 保留字段 | goto | const |
 | 变量引用 | void | this | super |
 | 错误处理 | try | catch | throw | throws | finally |
-| 基本类型 | byte | short | char | double | float | int | long | boolean |
+| 基本类型 | byte | short | char | float | double | int | long | boolean |
 | 程序控制 | break | continue | return | do | while | if | else | for | instanceof | switch | case | default | assert |
 | 类、方法和变量修饰符 | abstract | class | extend | final | implements | interface | navite | new | static | strictfp | synchronized | transient | volatile | enum |
 ```
@@ -187,7 +187,7 @@ public int f4(int a, int b) {
 ### 静态方法和实例方法有何不同？
 1. 调用方式
 在外部调用静态方法时，可以使用 类名·方法名的方式，也可以使用对象·方法名的方式，而实例方法只有后面这种方式。也就是说，调用静态方法可以无须创建对象。  
-但是需要注意的是一般不建议使用 对象·方法名的方式来调用静态方法，这种方式非常容易造成混淆，因为静态方法不属于类的某个对象而且属于这个类。因此，一般建议使用 类名·方法名的方式来调用静态方法。
+但是需要注意的是一般不建议使用 对象·方法名的方式来调用静态方法，这种方式非常容易造成混淆，因为静态方法不属于类的某个对象而属于这个类。因此，一般建议使用 类名·方法名的方式来调用静态方法。
 ```java
 public class Person {
     public void method() {
@@ -368,20 +368,21 @@ Java 中有8种基本数据类型，分别为：
 | double | 64 | 8 | 0d | 4.9E-324 ~ 1.7976931348623157E308 |
 | boolean | 1 |  | false | true ~ false |
 
-对于 boolean，官方文档种未明确定义，它依赖于 JVM 厂商的具体实现。逻辑上理解是占用1位，但是实际种会考虑计算机高效存储的因素。  
+对于 boolean，官方文档种未明确定义，它依赖于 JVM 厂商的具体实现。逻辑上理解是占用1位，但是实际上会考虑计算机高效存储的因素。  
 另外，Java 的每种基本数据类型所占用存储空间大小不会像其他大多数语言那样随着机器硬件架构的变化而变化。这种所占存储空间大小的不变性是 Java 程序比用其他大多数语言编写的程序更具可移植性的原因之一(《Java编程思想》2.2节有提到)。
 
 ⚠️注意：
-1. Java 里使用 long 类型的数据一定要在数值的后面加上L，否则将作为整型进行解析。
-2. Java 里使用 char a = 'h' 需使用单引号，String a = "hello world" 需使用双引号。
+1. Java 里使用 char a = 'h' 需使用单引号，String a = "hello world" 需使用双引号。
+2. Java 里使用 long 类型的数据一定要在数值的后面加上L，否则将作为整型进行解析。
 3. 这八种基本数据类型都有对应的包装类型其分别为：Byte、Short、Integer、Long、Float、Double、Character、Boolean。
 
 
 ### 基本类型与包装类型的区别？
-- 包装类型不赋值就是 null，而基本类型有默认值且不是 null。
-- 包装类型可用于泛型，而 基本类型不行。
-- 基本数据类型的局部变量存在在 Java 虚拟机栈中的局部变量中，基本数据类型的成员变量(未被static修饰)存放在Java虚拟机的堆中。包装类型属于对象类型，我们知道几乎所有对象实例都存在于堆中。
+- 包装类型可用于泛型，而基本类型不行。
 - 相对于对象类型，基本数据类型占用的空间非常小。
+- 包装类型不赋值就是 null，而基本类型有默认值且不是 null。
+- 基本数据类型的局部变量存在在 Java 虚拟机栈中的局部变量中，基本数据类型的成员变量(未被static修饰)存放在Java虚拟机的堆中。包装类型属于对象类型，我们知道几乎所有对象实例都存在于堆中。
+
 
 为什么说几乎所有的对象实例？  
 这是因为 HotSpot 虚拟机引入了JIT优化之后，会对对象进行逃逸分析，如果发现某一个对象并没有逃逸到方法外部，那么就可能通过表里替换来实现栈上分配，而避免堆上分配内存。
