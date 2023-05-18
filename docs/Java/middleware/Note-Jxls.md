@@ -55,7 +55,6 @@ jx:<command_name>(attr1='val1' attr2='val2' ... attrN='valN' lastCell=<last_cell
 jx:each(items="lists" var="bean" lastCell="F2")
 ```
 参数说明：
-
 | 参数名称 | 示例参数 | 是否必填  | 详细说明 |
 | :-----: | :-----: | :-----: | :-----: | 
 | items | items="lists" | 必填 | 循环的集合对象 |
@@ -69,8 +68,52 @@ jx:each(items="lists" var="bean" lastCell="F2")
 | multisheet | multisheet="sheets" | 非必填 | 循环的sheet名称集合，指定后会产生多个sheet，同时each的维度会变为sheet，不需要指定area |
 | shiftMode | shiftMode="adjacent" | 非必填 | adjacent指定后会通过添加行的方式向指定的方向进行输出，inner则为通过添加单元格的方式向指定的方向进行输出 |
 
-简单的示例图：
+简单的示例图：  
 ![image](images/jx-each.png)
 ![image](images/jx-each2.png)  
+
+2. jx:if 条件判断
+```java
+jx:if(condition="department.chief.name != 'Betsy'" lastCell="F4" areas = ["A3:F4"])
+```
+参数说明：
+| 参数名称 | 示例参数 | 是否必填  | 详细说明 |
+| :-----: | :-----: | :-----: | :-----: | 
+| condition | department.chief.name != 'Betsy' | 必填 | 判断条件,字符串不需要通过${}来取值，可直接访问传递对象内容 |
+| ifAreas | ifAreas = ["A3:F4"] | 非必填 | if指令影响的范围，当condition结果为true时则显示指定的范围 |
+| elseAreas | elseAreas = ["A3:F4"] | 非必填 | if指令影响的范围，当condition结果为false时则显示指定的范围 |
+
+3. jx:grid 输出表格
+```java
+jx:grid(lastCell="A4" headers="headers" data="datas" areas=[A3:A3,A4:A4] formatCells="BigDecimal:C1,Date:D1")
+```
+参数说明：
+| 参数名称 | 示例参数 | 是否必填  | 详细说明 |
+| :-----: | :-----: | :-----: | :-----: | 
+| headers | headers="headers" | 必填 | 循环的表头内容为List，表头和表体没有必然的关系 |
+| data | data="datas" | 必填 | 循环的表体内容为List，当为bean对象时Java代码中需要指定读取的属性名称 |
+| formatCells | formatCells="BigDecimal:C1,Date:D1" | 非必填 | 指定单元格格式化的方式 |
+
+简单的示例图：  
+![image](images/jx-grid.png)  
+
+4. jx:image 输出图片
+```java
+jx:image(src="bean2.imagebyte" lastCell="B9" imageType="PNG")
+```
+参数说明：
+| 参数名称 | 示例参数 | 是否必填  | 详细说明 |
+| :-----: | :-----: | :-----: | :-----: | 
+| src | src="bean2.imagebyte" | 必填 | 输出的图片数据源byte[] |
+| imageType | imageType="PNG" | 非必填 | 输出的图片格式可以不填 |
+
+简单的示例图：  
+![image](images/jx-image.png)
+
+
+
+
+
+
 
 
