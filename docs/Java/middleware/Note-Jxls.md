@@ -1,6 +1,7 @@
 #### 前言
-&emsp;&emsp;Jxls是一个简单的、轻量级的Excel导出库，它可以使用特定的标记在Excel模板文件中来自定义输出的格式和布局。
-Java中成熟的Excel导出工具有poi、jxl，但他们都是使用Java代码的方式来导出Excel，针对较为复杂的Excel，例如：固定的样式、合并单元格、动态列等导出要求时，使用传统的poi导出工具时需要开发人员花费很大的精力去编写代码，编码效率很低且不方便后期维护，但使用Jxls可以在很大程度上解决掉上述问题。
+Jxls是一个简单的、轻量级的Excel导出库，它可以使用特定的标记在Excel模板文件中来自定义输出的格式和布局。
+Java中成熟的Excel导出工具有poi、jxl，但他们都是使用Java代码的方式来导出Excel。当针对较为复杂的Excel时，例如：固定的样式、合并单元格、动态列等导出要求时，
+使用传统的poi导出需要开发人员花费较大的精力去编写代码，编码效率低且不方便后期维护，但使用Jxls可以在很大程度上解决掉上述问题，其通过自定义模板可实现复杂的Excel导出。
 
 #### 正文
 
@@ -56,7 +57,7 @@ jx:each(items="lists" var="bean" lastCell="F2")
 ```
 参数说明：
 | 参数名称 | 示例参数 | 是否必填  | 详细说明 |
-| :-----: | :-----: | :-----: | :-----: | 
+| :-----: | :-----: | :-----: | :----- | 
 | items | items="lists" | 必填 | 循环的集合对象 |
 | var | var="bean" | 必填 | 循环中的变量名，指定之后区域内可以使用该名称访问属性 |
 | lastCell | lastCell="F2" | 必填 | 指令对应的结束位置 | 
@@ -79,17 +80,17 @@ jx:if(condition="department.chief.name != 'Betsy'" lastCell="F4" areas = ["A3:F4
 参数说明：
 | 参数名称 | 示例参数 | 是否必填  | 详细说明 |
 | :-----: | :-----: | :-----: | :-----: | 
-| condition | department.chief.name != 'Betsy' | 必填 | 判断条件,字符串不需要通过${}来取值，可直接访问传递对象内容 |
+| condition | department.chief.name != 'Betsy' | 必填 | 判断条件,字符串不需要通过${}来取值 |
 | ifAreas | ifAreas = ["A3:F4"] | 非必填 | if指令影响的范围，当condition结果为true时则显示指定的范围 |
 | elseAreas | elseAreas = ["A3:F4"] | 非必填 | if指令影响的范围，当condition结果为false时则显示指定的范围 |
 
-3. jx:grid 输出表格
+1. jx:grid 输出表格
 ```java
 jx:grid(lastCell="A4" headers="headers" data="datas" areas=[A3:A3,A4:A4] formatCells="BigDecimal:C1,Date:D1")
 ```
 参数说明：
 | 参数名称 | 示例参数 | 是否必填  | 详细说明 |
-| :-----: | :-----: | :-----: | :-----: | 
+| :-----: | :-----: | :-----: | :----- | 
 | headers | headers="headers" | 必填 | 循环的表头内容为List，表头和表体没有必然的关系 |
 | data | data="datas" | 必填 | 循环的表体内容为List，当为bean对象时Java代码中需要指定读取的属性名称 |
 | formatCells | formatCells="BigDecimal:C1,Date:D1" | 非必填 | 指定单元格格式化的方式 |

@@ -32,7 +32,7 @@
 
   * [Nginx配置](Java/Note-Nginx.md)
   * [阿里云短信](Java/Note-Sms.md)
-  * [Excel导出](Java/middleware/Note-Jxls.md)
+  * [Jxls导出工具](Java/middleware/Note-Jxls.md)
 
 
 
@@ -43,5 +43,4 @@
 
 * 面试突击准备
 
-  * [基础知识](Java/Note-JavaBasis.md)
   * [面试总结](Java/Note-Interview.md)
