@@ -207,7 +207,7 @@ System.out.println(person1.getAddress() == person1Copy.getAddress());// false
 ## Java常见类
 
 ### Object
-#### Object类的常见方法有哪些？
+### Object类的常见方法有哪些？
 Object类是一个特殊的类，是所有类的父类。它主要提供了以下的 11 个方法：
 ```java
 
@@ -266,7 +266,7 @@ protected void finalize() throws Throwable { }
 ```
 
 
-#### ==和equals()的区别？
+### == 和 equals()的区别？
 == 对于基本数据类型和引用数据类型的作用效果是不同的：
 - 对于基本数据类型来说，== 比较的是值。
 - 对于引用数据类型来说，== 比较的是对象的内存地址。
@@ -334,6 +334,7 @@ public boolean equals(Object anObject) {
     return false;
 }
 ```
+
 
 
 
