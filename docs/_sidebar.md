@@ -32,7 +32,7 @@
 
   * [Nginx配置](Java/Note-Nginx.md)
   * [阿里云短信](Java/Note-Sms.md)
-  * [Jxls导出工具](Java/middleware/Note-Jxls.md)
+  * [Excel导出工具](Java/middleware/Note-Jxls.md)
 
 
 
