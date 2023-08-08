@@ -266,5 +266,75 @@ protected void finalize() throws Throwable { }
 ```
 
 
+### == 和 equals() 的区别？
+== 对于基本数据类型和引用数据类型的作用效果是不同的：
+- 对于基本数据类型来说，== 比较的是值。
+- 对于引用数据类型来说，== 比较的是对象的内存地址。
+```
+因为在Java中只有值传递，所以，对于 == 来说，不管是比较基本数据类型，还是比较引用数据类型的变量，其本质比较的都是值，只是引用类型变量存的值是对象在内存中的地址。
+```
+equals() 不能用于判断基本数据类型的变量，只能用来判断两个对象是否相等。  
+equals() 方法存在于Object类中，而Object类是所有类的直接或间接的父类，因此所有的类都有equals()方法。  
+
+Object类中的equals()方法：
+```java
+public boolean equals(Object obj) {
+     return (this == obj);
+}
+```
+equals()方法存在以下两种使用情况：
+- 类没有重写equals()方法：通过equals()方法比较该类的两个对象时，等价于通过“==”比较这两个对象，此时默认使用的是Object类中的equals()方法。
+- 类已重写了equals()方法：一般我们都重写equals()方法来比较两个对象中的属性值是否相等；若它们的属性值相等，则返回为true，即认为这两个对象相等。
+```java
+举例：
+// 此处仅为了举例，实际若按照下面的这种写法，IDEA工具会提示你将 == 换成 equals()
+
+// 放在常量池中
+String aa = "ab";
+// 从常量池中查找
+String bb = "ab";
+// a 为一个引用
+String a = new String("ab"); 
+// b为另一个引用,对象的内容一样
+String b = new String("ab"); 
+
+// false
+System.out.println(a == b);  
+// true   
+System.out.println(aa == bb);
+// true
+System.out.println(42 == 42.0);
+// true
+System.out.println(a.equals(b));
+```
+String中的equals()方法是被重写过的，因为Object中的equals()方法是比较的对象的内存地址，而String中的equals()方法比较的是对象的值。  
+当创建String类型的对象时，虚拟机会在常量池中查找有没有已经存在的值和要创建的值相同的对象，如果有就把它赋值给当前引用，如果没有就在常量池中重新创建一个String对象。
+
+String类中的equals()方法：
+```java
+public boolean equals(Object anObject) {
+    if (this == anObject) {
+        return true;
+    }
+    if (anObject instanceof String) {
+        String anotherString = (String)anObject;
+        int n = value.length;
+        if (n == anotherString.value.length) {
+            char v1[] = value;
+            char v2[] = anotherString.value;
+            int i = 0;
+            while (n-- != 0) {
+                if (v1[i] != v2[i])
+                    return false;
+                i++;
+            }
+            return true;
+        }
+    }
+    return false;
+}
+```
+
+
 
 
