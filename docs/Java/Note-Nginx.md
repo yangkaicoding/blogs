@@ -1,5 +1,5 @@
 #### 前言
-&emsp;&emsp;Nginx是一款由俄罗斯的程序设计师lgor Sysoev所开发高性能的Web和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器，在高并发的情况下，Nginx是Apache服务器不错的替代品。
+Nginx是一款高性能的Web和反向代理服务器，也是一个IMAP/POP3/SMTP代理服务器，在高并发的情况下，Nginx是Apache服务器不错的替代品。
 
 #### 正文
 - Nginx安装步骤（系统平台：CentOS release 7.0 64位）

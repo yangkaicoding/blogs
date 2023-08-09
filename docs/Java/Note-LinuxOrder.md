@@ -1,6 +1,7 @@
 #### 前言
 
-&emsp;&emsp;玩过Linux系统的人都知道，Linux系统中的命令确实是非常多的，但是玩过Linux系统的人也从不会因为Linux系统的命令如此之多而烦恼，因为只需要掌握我们最常用的命令就可以了。所以在此总结一下，方便以后的查看，下面就说说我常用的Linux命令。
+Linux系统中的命令确实是非常多的，但是玩过Linux系统的人也从不会因为Linux系统的命令如此之多而烦恼，  
+因为只需要掌握我们最常用的命令就可以了。所以在此总结一下，方便以后的查看，下面就说说我常用的Linux命令。
 
 - cd命令
 
@@ -47,9 +48,9 @@ ls -lr #以长数据串的形式列出当前目录下的所有文件
 基本语法：find [path][option][action]
 ```
 与时间有关的参数：
-* -mtime n：n为数字，意思为在n天之前的一天内被更改过的文件
+* -mtime n： n为数字，意思为在n天之前的一天内被更改过的文件
 * -mtime +n：列出在n天之前（不含n天本身）被更改过的文件名
-* -mtime -n：列出在n天之内（含n天本身）被更改过的文件名
+* -mtime -n：列出在n天之内（包含n天本身）被更改过的文件名
 * -newer file：列出比file更新的文件名
 ```
 示例：find /root -mtime 0 #在当前目录下查找今天之内有改动的文件
@@ -132,7 +133,7 @@ kill -signal PID
 &emsp;&emsp;备注：signal的常用参数最前面的数字为信号的代号，使用时可以用代号代替相应的信号。
 ```
 示例1：kill -SIGTERM %1 #以正常结束进程的方式来终止第一个后台工作，可用jobs命令查看后台中的第一个工作进程
-示例2：kill -SIGHUP PID #重新启动进程ID为PID的进程，PID可用ps命令通过管道命令加上grep命令进行筛选获得
+示例2：kill -SIGHUP PID #重新启动进程ID为PID的进程，PID可用ps命令以及通过管道命令加上grep命令进行筛选获得
 ```
 - tar命令
 
@@ -147,7 +148,7 @@ kill -signal PID
 * -C dir：指定压缩/解压的目录为dir
 ```
 示例1：tar -jtv -f filename.tar.bz2 dir(要处理的目录) #查询
-示例2：tar -jcv -f filename.tar.bz2 #压缩
+示例2：tar -jcv -f filename.tar.bz2 #压缩
 示例3：tar -jxv -f filename.tar.bz2 -C dir(欲解压的目录) #解压
 ```
 - cat命令
