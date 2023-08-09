@@ -14,7 +14,6 @@
   - [接口和抽象类有什么共同点和区别？](#接口和抽象类有什么共同点和区别？)
   - [深拷贝与浅拷贝的的区别了解吗？什么是引用拷贝？](#深拷贝与浅拷贝的的区别了解吗？什么是引用拷贝？)
 - [Java常见类](#java常见类)
-  - [Object](#object)
   - [Object类的常见方法有哪些？](#Object类的常见方法有哪些？)
-  - [==&nbsp;&nbsp;和&nbsp;&nbsp;equals()&nbsp;&nbsp;的区别？](#==  和  equals()  的区别？)
+  - [==&nbsp;&nbsp;和&nbsp;&nbsp;equals()&nbsp;&nbsp;的区别？](==&nbsp;&nbsp;和&nbsp;&nbsp;equals()&nbsp;&nbsp;的区别？)
   
