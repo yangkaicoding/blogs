@@ -336,6 +336,72 @@ public boolean equals(Object anObject) {
 ```
 
 
+### hashCode()有什么用？  
+hashCode()的作用是获取哈希码（int整数），也称为散列码。这个哈希码的作用是确定该对象在哈希表中的索引位置。  
+hashCode()定义在JDK中的 Object() 类中，这就意味着 Java 中的任何类都包含有 hashCode() 函数。另外需要注意的是：Object 的 hashCode() 方法是本地的方法，也就是用 C 语言或者 C++ 实现的。
+```java 
+public native int hashCode();
+```
+散列表存储的是键值对(key-value)，它的特点是：能够根据"键"快速的检索出对应的"值"。这其中就利用到了散列码，进而可以快速找到所需要的对象。
+
+
+
+### 为什么要有hashCode？  
+下面以"hashCode"是如何检查重复为例子来说明为什么要有 hashCode？  
+下面这段内容摘自我的 Java 启蒙书 《Head First Java》：  
+```
+当你把对象加入 HashSet 时，HashSet 会先计算对象的 HashCode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 HashCode 值作比较，如果没有相符的 HashCode，HashSet会假设对象没有重复出现。但是如果发现有相同的 HashCode 值得对象，这时就会调用 equals() 方法来检查 HashCode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他的位置，这样就会大大减少 equals 的次数，相应就大大提高了执行的速度。
+```
+其实，hashCode()和equals()方法都是用于比较两个对象是否相等，那为什么 JDK 中却还要同时提供这两个方法呢？  
+这是因为在一些容器中（比如 HashMap、HashSet）中，有了 hashCode() 之后，判断元素是否在对应容器中效率会更高（参考添加元素进 HashSet 的过程）！  
+我们在前面也提到了添加元素进 HashSet 的过程，如果 HashSet 在对比的时候，同样的 hashCode 有多个对象时，它会继续用 equals() 方法来判断是否真的相同。也就是说 hashCode 帮助我们大大缩小了查找成本。
+
+那为什么不只提供 hashCode() 方法呢？  
+这是因为两个对象的 hashCode 值相等并不代表这两个对象就相等。  
+
+那为什么两个对象有相同的 hashCode 值，它们也不一定是相等的呢？  
+因为 hashCode() 所使用的哈希算法也许刚好会让多个对象传回相同的哈希值。越糟糕的哈希算法越容易碰撞，但这也与数据值域分布的的特性相关（所谓哈希碰撞也就是指的是不同的对象得到相同的 hashCode）  
+
+综上所述，总结下来就是：
+- 如果两个对象的 hashCode 值相等，那这两个对象不一定相等（哈希碰撞）
+- 如果两个对象的 hashCode 值相等并且 equals() 方法也返回 true，我们才认为这两个对象相等。
+- 如果两个对象的 hashCode 值不相等，那我们就可以直接认为这两个对象不相等。
+
+### 为什么重写equals()时必须重写hashCode()方法？  
+因为两个相等的对象的 hashCode 值必须是相等，也就是说如果 equals 方法判断两个是相等的，那这两个对象的 hashCode 值也要相等。  
+如果重写 equals() 方法 时没有重写 hashCode() 方法的话就可能会导致 equals 方法判断是相等的两个对象，但 hashCode 值却又不相等。
+
+总结：
+- 两个对象有相同的 hashCode 值，他们也不一定是相等的（哈希碰撞）。
+- equals() 方法判断两个对象是相等的，那这两个对象的 hashCode 值也要相等。  
+
+
+
+### String
+### String、StringBuffer、StringBuilder的区别？
+- String 是不可变的。  
+- StringBuilder 与 StringBuffer 都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串，不过没有使用 final 和 private 关键字修饰。
+
+线程安全性  
+String 中的对象是不可变的，也就可以理解为常量，线程安全。  
+StringBuffer 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的，StringBuilder 并没有针对方法增加同步锁，所以是线程安全。  
+AbstractStringBuilder 是 StringBuilder 与 StringBuffer 的公共父类，定义了一些字符串的基本操作，如 expandCapacity、append、insert、indexOf 等公共方法。
+
+性能  
+Java 中每次对 String 类型进行改变的时候，都会生成一个新的 String 对象，然后将指针指向新的 String 对象。  
+StringBuffer 每次都会对 StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用，相同情况下使用 StringBuilder 相比使用 StringBuffer 仅能获得10%-15%左右的性能提示，但却要冒线程不安全的风险。  
+
+对于三者使用的总结如下：  
+- 操作少量的数据：适用于 String
+- 单线程操作字符串缓冲区下操作大量数据：使用于 StringBuilder
+- 多线程操作字符串缓冲区下操作大量数据：使用于 StringBuffer
+
+
+
+
+
+
+
 
 
 
