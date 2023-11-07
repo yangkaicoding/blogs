@@ -266,6 +266,7 @@ protected void finalize() throws Throwable { }
 ```
 
 
+
 ### ==&nbsp;&nbsp;和&nbsp;&nbsp;equals()&nbsp;&nbsp;的区别？
 == 对于基本数据类型和引用数据类型的作用效果是不同的：
 - 对于基本数据类型来说，== 比较的是值。
@@ -353,7 +354,7 @@ public native int hashCode();
 当你把对象加入 HashSet 时，HashSet 会先计算对象的 HashCode 值来判断对象加入的位置，同时也会与其他已经加入的对象的 HashCode 值作比较，如果没有相符的 HashCode，HashSet会假设对象没有重复出现。但是如果发现有相同的 HashCode 值得对象，这时就会调用 equals() 方法来检查 HashCode 相等的对象是否真的相同。如果两者相同，HashSet 就不会让其加入操作成功。如果不同的话，就会重新散列到其他的位置，这样就会大大减少 equals 的次数，相应就大大提高了执行的速度。
 ```
 其实，hashCode()和equals()方法都是用于比较两个对象是否相等，那为什么 JDK 中却还要同时提供这两个方法呢？  
-这是因为在一些容器中（比如 HashMap、HashSet）中，有了 hashCode() 之后，判断元素是否在对应容器中效率会更高（参考添加元素进 HashSet 的过程）！  
+这是因为在一些容器中（比如 HashMap、HashSet）中，有了 hashCode() 之后，判断元素是否在对应容器中效率会更高  
 我们在前面也提到了添加元素进 HashSet 的过程，如果 HashSet 在对比的时候，同样的 hashCode 有多个对象时，它会继续用 equals() 方法来判断是否真的相同。也就是说 hashCode 帮助我们大大缩小了查找成本。
 
 那为什么不只提供 hashCode() 方法呢？  
