@@ -23,7 +23,7 @@
 ### 如果一个类没有声明构造方法，该程序能够正确执行吗？
 如果一个类没有声明构造方法，该程序也能够正确执行。因为一个类即使没有声明构造方法也会有默认的不带参数的构造方法。如果我们自己添加了类的构造方法（无论是否有参），Java就不会再添加默认的无参构造方法了，我们一直在不知不觉地使用构造方法，这也是为什么在创建对象的时候后面要加一个括号（因为要调用无参的构造方法）。如果我们重载了有参的构造方法，记得都要把无参的构造方法都写出来（无论是否用到），因为这可以帮助我们在创建对象的时候少踩坑。
 
-·
+
 ### 构造方法有哪些特点？是否可被重写？
 构造方法特点如下：
 - 名字与类名相同。
@@ -267,7 +267,7 @@ protected void finalize() throws Throwable { }
 
 
 
-### ==&nbsp;&nbsp;和&nbsp;&nbsp;equals()&nbsp;&nbsp;的区别？
+### ==和equals()的区别？
 == 对于基本数据类型和引用数据类型的作用效果是不同的：
 - 对于基本数据类型来说，== 比较的是值。
 - 对于引用数据类型来说，== 比较的是对象的内存地址。
@@ -346,7 +346,6 @@ public native int hashCode();
 散列表存储的是键值对(key-value)，它的特点是：能够根据"键"快速的检索出对应的"值"。这其中就利用到了散列码，进而可以快速找到所需要的对象。
 
 
-
 ### 为什么要有hashCode？  
 下面以"hashCode"是如何检查重复为例子来说明为什么要有 hashCode？  
 下面这段内容摘自我的 Java 启蒙书 《Head First Java》：  
@@ -368,6 +367,7 @@ public native int hashCode();
 - 如果两个对象的 hashCode 值相等并且 equals() 方法也返回 true，我们才认为这两个对象相等。
 - 如果两个对象的 hashCode 值不相等，那我们就可以直接认为这两个对象不相等。
 
+
 ### 为什么重写equals()时必须重写hashCode()方法？  
 因为两个相等的对象的 hashCode 值必须是相等，也就是说如果 equals 方法判断两个是相等的，那这两个对象的 hashCode 值也要相等。  
 如果重写 equals() 方法 时没有重写 hashCode() 方法的话就可能会导致 equals 方法判断是相等的两个对象，但 hashCode 值却又不相等。
@@ -375,7 +375,6 @@ public native int hashCode();
 总结：
 - 两个对象有相同的 hashCode 值，他们也不一定是相等的（哈希碰撞）。
 - equals() 方法判断两个对象是相等的，那这两个对象的 hashCode 值也要相等。  
-
 
 
 ### String
@@ -398,9 +397,100 @@ StringBuffer 每次都会对 StringBuffer 对象本身进行操作，而不是�
 - 多线程操作字符串缓冲区下操作大量数据：使用于 StringBuffer
 
 
+### String为什么是不可变的？
+String 类中使用 final 关键字修饰字符数组来保存字符串。
+```java 
+public final class String implements java.io.Serializable, Comparable<String>, CharSequence {
+    private final char value[];
+	//...
+}
+```
+我们知道被 fianal 关键字修饰的类不能被继承，修饰的方法不能被重写，修饰的变量是基本数据类型则值不能改变，修饰的变量是引用类型则不能再指向其他对象。  
+因此，final 关键字修饰的数组来保存字符串并不是 String 不可变的根本原因，因为这个数组保存的字符串是可变的，String 真正不可变的原因为下面的几点原因所致：  
+- String 类被 final 修饰导致其不能被继承，进而避免了子类破坏 String 不可变。
+- 保存字符串的数组被 final 修饰且为私有的，并且 String 类没有提供/暴露修改这个字符串的方法。
 
 
+### 字符串拼接用"+"还是使用StringBuilder？
+Java 语言本身并不支持运算符重载，"+" 和 "+=" 是专门为 String 类重载过的运算，也是 Java 中仅有的两个重载过的运算符。  
+字符串对象通过"+"的字符串拼接方式，实际上是通过 StringBuilder 调用 append() 方法实现的，拼接完成之后调用 toString() 来得到一个String 对象。  
+不过，在循环内使用"+"进行字符串的拼接的话，存在较为明显的缺陷：编译器不会创建单个 StringBuilder 以复用，会导致创建过多的 StringBuilder 对象。  
+```java
+String[] arr = {"he", "llo", "world"};
+String s = "";
+for (int i = 0; i < arr.length; i++) {
+    s += arr[i];
+}
+System.out.println(s);
+```
+StringBuilder 对象是在循环内部被创建的，这意味着每循环一次就会创建一个 StringBuilder 对象。  
+```java
+String[] arr = {"he", "llo", "world"};
+StringBuilder s = new StringBuilder();
+for (String value : arr) {
+    s.append(value);
+}
+System.out.println(s);
+```
+但如果直接使用 StringBuilder 对象进行字符串拼接的话，就不会存在这个问题了，因为StringBuilder 对象是在循环外部被创建的。  
+不过，使用"+"进行字符串拼接会产生大量的临时对象的问题已在 JDK9 中得到了解决。在 JDK9[JEP 280](https://openjdk.org/jeps/280) 当中，字符串相加 "+" 改为了用动态的方法 makeConcatWithConstants() 来实现，而非使用大量的 StringBuilder 对象了。
 
+
+### String类中的equal()和Object类中的equal()方法有何区别？
+String 中的 equals方法是被重写过的，比较的是 String 字符串的值是否相等。Object 中的 equals方法则是比较的对象的内存地址是否相等。
+
+
+### 字符串常量池的作用？
+字符串常量池是 JVM 为了提升性能和减少内存消耗而针对字符串（String类）专门开辟的一块区域，主要目的是为了避免字符串的重复创建。
+```java
+// 在堆中创建字符串对象”ab“
+// 将字符串对象”ab“的引用保存在字符串常量池中
+String aa = "ab";
+// 直接返回字符串常量池中字符串对象”ab“的引用
+String bb = "ab";
+System.out.println(aa==bb);        // true
+```
+
+
+### String s1 = new String("abc");这行代码创建了几个字符串对象？
+- 如果字符串常量池中已存在字符串对象"abc"的引用，则只会在堆中创建1个字符串对象"abc"。
+```
+// 字符串常量池中已存在字符串对象“abc”的引用
+String s1 = "abc";
+// 下面这段代码只会在堆中创建 1 个字符串对象“abc”
+String s2 = new String("abc");
+```
+- 如果字符串常量池中不存在字符串对象"abc"的引用，那么它会在堆上创建两个字符串对象，且其中一个字符串对象的引用会被保存在字符串常量池中。
+```
+String s1 = new String("abc");
+```
+![image](images/new-string-byte-code.png)  
+ldc 命令用于判断字符串常量池中是否保存了对应的字符串对象的引用，如果保存了的话就直接返回，如果没有保存的话，则会在堆中创建对应的字符串对象并将该字符串对象的引用保存至字符串常量池中。
+
+
+### String.intern方法有什么作用？
+String.intern() 是一个 native（本地）方法，其作用是将指定的字符串对象的引用保存在字符串常量池中，可以简单分为以下两种情况：
+- 如果字符串常量池中保存了对应的字符串对象的引用，就直接返回该引用。
+- 如果字符串常量池中没有保存对应的字符串对象的引用，那就在常量池中创建一个指向该字符串对象的引用并返回。
+
+示例代码（JDK1.8）:
+```java
+// 在堆中创建字符串对象”Java“
+// 将字符串对象”Java“的引用保存在字符串常量池中
+String s1 = "Java";
+// 直接返回字符串常量池中字符串对象”Java“对应的引用
+String s2 = s1.intern();
+// 会在堆中在单独创建一个字符串对象
+String s3 = new String("Java");
+// 直接返回字符串常量池中字符串对象”Java“对应的引用
+String s4 = s3.intern();
+// s1 和 s2 指向的是堆中的同一个对象
+System.out.println(s1 == s2); // true
+// s3 和 s4 指向的是堆中不同的对象
+System.out.println(s3 == s4); // false
+// s1 和 s4 指向的是堆中的同一个对象
+System.out.println(s1 == s4); // true
+```
 
 
 
