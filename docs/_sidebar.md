@@ -18,10 +18,6 @@
 * 代码片段
   * [代码片段](Java/Note-CodeSegment.md)
 
-
-* 操作系统
-  * [Linux系统](Java/Note-Linux.md)
-
   
 * 工具和中间件
   * [Nginx配置](Java/Note-Nginx.md)
